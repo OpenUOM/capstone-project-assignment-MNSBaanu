@@ -28,8 +28,8 @@ const readTeachers = async () => {
     return new Promise((resolve, reject) => {
         knex_db
             .raw(sql)
-            .then((data) => {
-                resolve(data);
+            .then((teachers) => {
+                resolve(teachers);
             })
             .catch((error) => {
                 reject(error);
@@ -42,8 +42,8 @@ const readTeacherInfo = async (id) => {
     return new Promise((resolve, reject) => {
         knex_db
             .raw(sql, [id])
-            .then((data) => {
-                resolve(data);
+            .then((teacher) => {
+                resolve(teacher);
             })
             .catch((error) => {
                 reject(error);
@@ -66,7 +66,7 @@ const addTeacher = async (id, name, age) => {
 }
 
 const updateTeacher = async (name, age, id) => {
-    const sql = `UPDATE teacher SET name = ?, age = ? WHERE id = ?`
+    const sql = `UPDATE teacher SET name=?, age=? WHERE id=?`
     return new Promise((resolve, reject) => {
         knex_db
             .raw(sql, [name, age, id])
@@ -164,14 +164,9 @@ const deleteStudent = async (id) => {
 }
 
 module.exports = {
-    readTeachers,
-    readStudents,
-    addStudent,
     addTeacher,
-    deleteTeacher,
-    deleteStudent,
-    readStudentInfo,
+    readTeachers,
     readTeacherInfo,
-    updateStudent,
-    updateTeacher
+    updateTeacher,
+    deleteTeacher
 };
